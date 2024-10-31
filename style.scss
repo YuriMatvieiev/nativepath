@@ -51,6 +51,9 @@ body {
 .font-normal {
   font-weight: 400;
 }
+.font-italic {
+  font-style: italic;
+}
 
 //========================================================================================================================================================
 
@@ -374,6 +377,9 @@ body {
       }
       &:last-of-type {
         margin-bottom: 36px;
+        @media (max-width: $mobile) {
+          margin-bottom: 14px;
+        }
       }
     }
   }
@@ -673,6 +679,7 @@ body {
   // .content__group
   &__group {
     display: grid;
+    grid-template-areas: "text img";
     grid-template-columns: 10fr 6fr;
     gap: 20px;
     margin-top: 20px;
@@ -680,9 +687,18 @@ body {
     @media (max-width: $mobile) {
       grid-template-columns: 1fr;
     }
+    &.img-right {
+      grid-template-areas: "text img";
+      grid-template-columns: 10fr 6fr;
+    }
+    &.img-left {
+      grid-template-areas: "img text";
+      grid-template-columns: 6fr 10fr;
+    }
   }
   // .content__group-text
   &__group-text {
+    grid-area: text;
     @media (max-width: $mobile) {
       order: 2;
     }
@@ -697,13 +713,17 @@ body {
   }
   // .content__group-img
   &__group-img {
+    grid-area: img;
     width: 100%;
-    max-height: 280px;
+    min-height: 280px;
     object-fit: cover;
     object-position: center;
+    aspect-ratio: 350 / 280;
+    height: 100%;
     @media (max-width: $mobile) {
       order: 1;
       max-height: 260px;
+      min-height: unset;
     }
   }
   // .content__face-steps
@@ -922,15 +942,26 @@ body {
 
 .diagram {
   background: #f1eeea;
+  padding-top: 26px;
+  padding-bottom: 48px;
   // .diagram__container
   &__container {
     display: grid;
     grid-template-columns: 3fr 7fr;
     align-items: center;
     gap: 20px;
+    @media (max-width: $tablet) {
+      grid-template-columns: 4fr 7fr;
+    }
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+    }
   }
   // .diagram__text
   &__text {
+    @media (max-width: $mobile) {
+      text-align: center;
+    }
   }
   // .diagram__title
   &__title {
@@ -938,30 +969,54 @@ body {
     font-weight: 800;
     background: #ffaca3;
     display: inline-block;
+    padding: 4px 6px;
+    line-height: 1.2;
+    @media (max-width: $tablet) {
+      font-size: 32px;
+    }
+    @media (max-width: $mobile) {
+      font-size: 30px;
+    }
   }
   // .diagram__list
   &__list {
     li {
       font-weight: 700;
+      @media (max-width: $tablet) {
+        font-size: 20px;
+      }
+      @media (max-width: $mobile) {
+        font-size: 19px;
+      }
     }
   }
   // .diagram__diagram
   &__diagram {
-    display: flex;
-    align-items: center;
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    align-items: center;
   }
   // .diagram__diagram-left-text
   &__diagram-left-text {
     font-size: 20px;
     font-weight: 700;
     max-width: 115px;
+    line-height: 1.2;
+    @media (max-width: $mobile) {
+      font-size: 16px;
+    }
   }
   // .diagram__diagram-bottom-text
   &__diagram-bottom-text {
     position: absolute;
-    left: 50%;
+    left: 55%;
     bottom: -20px;
+    font-weight: 800;
+    font-size: 20px;
+    @media (max-width: $mobile) {
+      font-size: 16px;
+    }
   }
   // .diagram__diagram-img
   &__diagram-img {
